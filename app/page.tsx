@@ -1,7 +1,6 @@
 // import React from 'react'
 // import 할 필요가 없음.
 
-import Navigation from "../components/navigation";
 
 // 컴포넌트 이름은 상관 없음.
 // export default여야 함
@@ -12,7 +11,6 @@ export default function Page() {
     return (
         <div>
             <h1>hello!</h1>
-            <Navigation />
         </div>
     )
 }
