@@ -11,6 +11,10 @@ import Avatar from "./components/avatar"
  API key를 사용해서 API를 fetch한다고 하면
  해당 코드는 client로 가지 않기 때문에 보완에 신경쓰지 않아도 됨
 */
+export const metadata = {
+    title: 'about-us',
+}
+
 export default function AboutUs() {
     return (
         <div>
