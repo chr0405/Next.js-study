@@ -1,39 +1,41 @@
 // import React from 'react'
 // import 할 필요가 없음.
-"use client"
-import { useState, useEffect } from "react";
-// client component에서는 metadata를 export 할 수 없음
-
-// 컴포넌트 이름은 상관 없음.
-// export default여야 함
-
-// root segmenet
 
 // 폴더명이 () 안에 있으면 URL에 영향을 미치지 x
-// export const metadata = {
-//     title: 'home',
-// };
 
-export default function Page() {
-    
-    const [isLoading, setIsLoading] = useState(true);
-    const [movies, setMovies] = useState([]);
-    
-    const getMovies = async () => {
-        const response = await fetch("https://nomad-movies.nomadcoders.workers.dev/movies");
-        // 이 방법은 fetch이 client에서 일어나니 API 키 등의 정보를 넣을 수 없음.
-        const json = await response.json();
-        setMovies(json);
-        setIsLoading(false);
-    }
+// client component에서는 metadata를 export 할 수 없음
+export const metadata = {
+    title: 'home',
+};
 
-    useEffect(() => {
-        getMovies();
-    }, []);
+const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
+// 로딩 상태가 사라지는 것은 아님. (빠르게 데이터가 보일 뿐)
+async function getMovies() {
+    // 로딩 상태를 보여주기 위해 함수를 잠시 멈춤
+    /*
+     로딩 상태가 옮겨갔다.
+     = 페이지가 열리기까지 시간이 걸린다.
+     = 사용자가 일정 시간동안 사이트 접속을 기다려야 함
+     */
+    // await - Promise를 기다리는 데에 사용
+    // Promise - 완료하는 데 시간이 걸릴 수 있는 작업을 처리할 때 사용
+    // resolve - Promise 생성자가 제공하는 함수.
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log('I`m fetching');
+    const response = await fetch(URL);
+    const json = await response.json();
+    return json;
+}
+
+// root segmenet
+// 컴포넌트 이름은 상관 없음.
+// export default여야 함
+export default async function HomePage() {
+    const movies = await getMovies();
     return (
         <div>
-            {isLoading? "Loading..." : JSON.stringify(movies)}
+            {JSON.stringify(movies)}
         </div>
     )
 }
