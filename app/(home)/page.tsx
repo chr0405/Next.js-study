@@ -1,6 +1,8 @@
 // import React from 'react'
 // import 할 필요가 없음.
 
+import Link from "next/link";
+
 // 폴더명이 () 안에 있으면 URL에 영향을 미치지 x
 
 // client component에서는 metadata를 export 할 수 없음
@@ -8,7 +10,7 @@ export const metadata = {
     title: 'home',
 };
 
-const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+export const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 // 로딩 상태가 사라지는 것은 아님. (빠르게 데이터가 보일 뿐)
 async function getMovies() {
@@ -21,9 +23,9 @@ async function getMovies() {
     // await - Promise를 기다리는 데에 사용
     // Promise - 완료하는 데 시간이 걸릴 수 있는 작업을 처리할 때 사용
     // resolve - Promise 생성자가 제공하는 함수.
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log('I`m fetching');
-    const response = await fetch(URL);
+    const response = await fetch(API_URL);
     const json = await response.json();
     return json;
 }
@@ -35,7 +37,11 @@ export default async function HomePage() {
     const movies = await getMovies();
     return (
         <div>
-            {JSON.stringify(movies)}
+            {movies.map((movie) => (
+        <li key={movie.id}>
+          <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+        </li>
+      ))}
         </div>
     )
 }
