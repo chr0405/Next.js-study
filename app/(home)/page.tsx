@@ -2,6 +2,8 @@
 // import 할 필요가 없음.
 
 import Link from "next/link";
+import Movie from "../../components/movie";
+import styles from "../styles/home.module.css";
 
 // 폴더명이 () 안에 있으면 URL에 영향을 미치지 x
 
@@ -38,10 +40,13 @@ export default async function HomePage() {
     return (
         <div>
             {movies.map((movie) => (
-        <li key={movie.id}>
-          <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
-        </li>
-      ))}
+                <Movie
+                    key={movie.id}
+                    id={movie.id}
+                    poster_path={movie.poster_path}
+                    title={movie.title}
+                />
+            ))}
         </div>
     )
 }
