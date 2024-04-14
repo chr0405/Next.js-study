@@ -4,6 +4,7 @@
 import Link from "next/link";
 import Movie from "../../components/movie";
 import styles from "../styles/home.module.css";
+import { API_URL } from "../constants";
 
 // 폴더명이 () 안에 있으면 URL에 영향을 미치지 x
 
@@ -11,8 +12,6 @@ import styles from "../styles/home.module.css";
 export const metadata = {
     title: 'home',
 };
-
-export const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 // 로딩 상태가 사라지는 것은 아님. (빠르게 데이터가 보일 뿐)
 async function getMovies() {
