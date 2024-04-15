@@ -16,8 +16,8 @@ export default function Movie({id, poster_path, title} : MovieProps) {
         router.push(`/movies/${id}`);
     }
     return (
-        <div>
-            <img src={poster_path} alt={title}/>
+        <div className={styles.movie}>
+            <img src={poster_path} alt={title} onClick={onClick}/>
             <Link prefetch href={`/movies/${id}`}>{title}</Link>
         </div>
     )

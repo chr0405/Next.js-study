@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import Movie from "../../components/movie";
-import styles from "../styles/home.module.css";
+import styles from "../../styles/home.module.css";
 import { API_URL } from "../constants";
 
 // 폴더명이 () 안에 있으면 URL에 영향을 미치지 x
@@ -37,7 +37,7 @@ async function getMovies() {
 export default async function HomePage() {
     const movies = await getMovies();
     return (
-        <div>
+        <div className={styles.container}>
             {movies.map((movie) => (
                 <Movie
                     key={movie.id}
